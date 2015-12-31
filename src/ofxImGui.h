@@ -32,7 +32,7 @@ public:
     
     GLuint loadTexture(string imagePath);
     GLuint loadTexture(ofTexture& texture, string imagePath);
-    
+    GLuint loadTexture(ofTexture& texture);
     BaseTheme* theme;
     void setTheme(BaseTheme* theme);
 private:

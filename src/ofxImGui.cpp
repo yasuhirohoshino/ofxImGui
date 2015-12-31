@@ -77,13 +77,25 @@ GLuint ofxImGui::loadImage(string imagePath)
 
 GLuint ofxImGui::loadTexture(string imagePath)
 {
+    bool isUsingArb = ofGetUsingArbTex();
+    if(isUsingArb)
+    {
+        ofDisableArbTex();
+    }
     
-    ofDisableArbTex();
     ofTexture* texture  = new ofTexture();
     ofLoadImage(*texture, imagePath);
-    ofEnableArbTex();
+    if(isUsingArb)
+    {
+       ofEnableArbTex();
+    }
     loadedTextures.push_back(texture);
     return texture->getTextureData().textureID;
+}
+
+GLuint ofxImGui::loadTexture(ofTexture& texture)
+{
+    return texture.getTextureData().textureID;
 }
 
 GLuint ofxImGui::loadTexture(ofTexture& texture, string imagePath)
