@@ -29,9 +29,6 @@ void ofxImGui::setup(BaseTheme* theme_)
     {
         setTheme(new BaseTheme());
     }
-    
-    
-
 }
 void ofxImGui::setTheme(BaseTheme* theme_)
 {
@@ -95,7 +92,30 @@ GLuint ofxImGui::loadTexture(string imagePath)
 
 GLuint ofxImGui::loadTexture(ofTexture& texture)
 {
-    return texture.getTextureData().textureID;
+    GLuint textureID = -1;
+    
+    if(texture.getTextureData().textureTarget != GL_TEXTURE_2D)
+    {
+        ofLogVerbose() << "your texture is in the wrong format - will now be reallocated";
+        ofFbo::Settings fboSettings;
+        fboSettings.width = texture.getWidth();
+        fboSettings.height = texture.getHeight();
+        fboSettings.internalformat = GL_RGBA;
+        fboSettings.textureTarget = GL_TEXTURE_2D;
+        ofFbo fbo;
+        fbo.allocate(fboSettings);
+        fbo.begin();
+            ofClear(0);
+            texture.draw(0, 0);
+        fbo.end();
+        texture = fbo.getTexture();
+        textureID =  fbo.getTexture().texData.textureID;
+    }else
+    {
+        textureID = texture.getTextureData().textureID;
+    }
+    ofLogVerbose() << "textureID: " << textureID;
+    return textureID;
 }
 
 GLuint ofxImGui::loadTexture(ofTexture& texture, string imagePath)
@@ -164,7 +184,6 @@ void ofxImGui::close()
     {
         delete loadedTextures[i];
     }
-    loadedTextures.clear();
 }
 
 ofxImGui::~ofxImGui()
