@@ -161,8 +161,6 @@ void ofxImGui::end()
     ImGui::Render();
 }
 
-
- 
 void ofxImGui::close()
 {
     if(engine)
@@ -184,6 +182,7 @@ void ofxImGui::close()
     {
         delete loadedTextures[i];
     }
+    loadedTextures.clear();
 }
 
 ofxImGui::~ofxImGui()
