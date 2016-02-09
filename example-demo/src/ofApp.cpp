@@ -51,6 +51,13 @@ void ofApp::update(){
     
     
 }
+
+int ofApp::textCallback (ImGuiTextEditCallbackData* data)
+{
+    ofLogVerbose() << data->Buf;
+    return 0;
+}
+
 bool doThemeColorsWindow = false;
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -67,6 +74,11 @@ void ofApp::draw(){
     // 1. Show a simple window
     {
         ImGui::Text("Hello, world!");
+        
+        static char str0[128] = "Input capable!";
+        ImGuiInputTextFlags flags = ImGuiInputTextFlags_CallbackAlways;
+        ImGui::InputText("input text", str0, 128, flags, &ofApp::textCallback, (void *)this);
+
         ImGui::SliderFloat("Float", &floatValue, 0.0f, 1.0f);
         
         //this will change the app background color

@@ -29,7 +29,7 @@ int main()
     ofGLWindowSettings glWindowSettings;
     glWindowSettings.width = 1280;
     glWindowSettings.height = 720;
-    glWindowSettings.setGLVersion(3, 2);
+    glWindowSettings.setGLVersion(4, 1);
     ofCreateWindow(glWindowSettings);
 #else
     ofSetLogLevel("ofThread", OF_LOG_ERROR);

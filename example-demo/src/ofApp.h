@@ -36,4 +36,5 @@ public:
     ofTexture textureSource;
     GLuint textureSourceID;
     
+    static int textCallback (ImGuiTextEditCallbackData *data);
 };
