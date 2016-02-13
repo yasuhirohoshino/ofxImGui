@@ -2,6 +2,7 @@
 
 #include "ofxiOS.h"
 #include "ofxImGui.h"
+#include "InputTextButton.h"
 
 class ofApp : public ofxiOSApp {
 	
@@ -36,6 +37,8 @@ public:
     
     ofTexture textureSource;
     GLuint textureSourceID;
+    
+    InputTextButton inputTextButton;
 
 };
 

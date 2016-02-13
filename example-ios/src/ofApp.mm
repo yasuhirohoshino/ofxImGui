@@ -35,12 +35,17 @@ void ofApp::setup(){
     //textureSourceID = gui.loadTexture("of_upside_down.png");
     
     ofLogVerbose() << "textureSourceID: " << textureSourceID;
+    
+    inputTextButton.setup("Editable Text Button");
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-
+void ofApp::update()
+{
+    
+    
 }
+
 
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -55,7 +60,9 @@ void ofApp::draw(){
     
     // 1. Show a simple window
     {
-        ImGui::Text("Hello, world!");
+        inputTextButton.draw();
+        
+        ImGui::Text(inputTextButton.text.c_str());
         ImGui::SliderFloat("Float", &floatValue, 0.0f, 1.0f);
         
         //this will change the app background color
