@@ -96,6 +96,12 @@ void ofApp::draw(){
 
     ofSetBackgroundColor(backgroundColor);
     
+    textureButton.draw(0, 0);
+    int w = videoPlayer.getWidth();
+    videoFBO.draw(w, 0);
+    videoPlayer.draw(w*2, 0);
+    videoFBO.getTexture().draw(w*3, 0);
+    
     //required to call this at beginning
     gui.begin();
     
@@ -103,10 +109,11 @@ void ofApp::draw(){
     {
         ofLogVerbose() << "listBoxContent changed to " << listBoxContent.currentIndex;
     }
+    bool pressed = ImGui::ImageButton(TEX_ID videoButtonID, ImVec2(200, 141));
+    pressed = ImGui::ImageButton(TEX_ID imageButton, ImVec2(200, 200));
+    pressed = ImGui::ImageButton(TEX_ID videoButtonID, ImVec2(200, 200));
+    pressed = ImGui::ImageButton(TEX_ID textureButtonPreAllocatedID, ImVec2(200, 200));
     
-    
-    gui.end();
-    return;
     //In between gui.begin() and gui.end() you can use ImGui as you would anywhere else
     
     // 1. Show a simple window
@@ -150,10 +157,7 @@ void ofApp::draw(){
     }
     
     
-    bool pressed = ImGui::ImageButton(TEX_ID imageButton, ImVec2(200, 141));
-    pressed = ImGui::ImageButton(TEX_ID textureButtonID, ImVec2(200, 200));
-    pressed = ImGui::ImageButton(TEX_ID videoButtonID, ImVec2(200, 200));
-    pressed = ImGui::ImageButton(TEX_ID textureButtonPreAllocatedID, ImVec2(200, 200));
+ 
 
 
     
@@ -170,11 +174,7 @@ void ofApp::draw(){
     //required to call this at end
     gui.end();
     
-    textureButton.draw(0, 0);
-    int w = videoPlayer.getWidth();
-    videoFBO.draw(w, 0);
-    videoPlayer.draw(w*2, 0);
-    videoFBO.getTexture().draw(w*3, 0);
+
 }
 
 
