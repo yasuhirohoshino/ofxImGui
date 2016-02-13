@@ -30,11 +30,14 @@ public:
     bool show_another_window;
     
     float floatValue;
-    GLuint imageButton;
+    
+    GLuint imageButtonID;
     GLuint textureButtonID;
+    GLuint textureButtonPreAllocatedID;
+    
     ofTexture textureButton;
     ofTexture textureButtonPreAllocated;
-    GLuint textureButtonPreAllocatedID;
+   
     
     ListBoxContent listBoxContent;
     ofVideoPlayer videoPlayer;

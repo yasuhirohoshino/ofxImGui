@@ -21,7 +21,7 @@ void ofApp::setup()
     show_another_window = false;
     floatValue = 0.0f;
     
-    imageButton = gui.loadImage("of.png");
+    imageButtonID = gui.loadImage("of.png");
     textureButtonID = gui.loadTexture(textureButton, "of.png");
     
     ofLoadImage(textureButtonPreAllocated, "of.png");
@@ -110,7 +110,7 @@ void ofApp::draw(){
         ofLogVerbose() << "listBoxContent changed to " << listBoxContent.currentIndex;
     }
     bool pressed = ImGui::ImageButton(TEX_ID videoButtonID, ImVec2(200, 141));
-    pressed = ImGui::ImageButton(TEX_ID imageButton, ImVec2(200, 200));
+    pressed = ImGui::ImageButton(TEX_ID imageButtonID, ImVec2(200, 200));
     pressed = ImGui::ImageButton(TEX_ID videoButtonID, ImVec2(200, 200));
     pressed = ImGui::ImageButton(TEX_ID textureButtonPreAllocatedID, ImVec2(200, 200));
     
