@@ -96,6 +96,5 @@ public:
     int currentIndex;
     int heightInLines;
     const char** items;
-    string itemBuffer;
     map< int, const char *> itemCollection;
 };
