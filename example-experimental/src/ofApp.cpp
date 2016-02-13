@@ -99,6 +99,14 @@ void ofApp::draw(){
     //required to call this at beginning
     gui.begin();
     
+    if(listBoxContent.draw())
+    {
+        ofLogVerbose() << "listBoxContent changed to " << listBoxContent.currentIndex;
+    }
+    
+    
+    gui.end();
+    return;
     //In between gui.begin() and gui.end() you can use ImGui as you would anywhere else
     
     // 1. Show a simple window
@@ -148,10 +156,7 @@ void ofApp::draw(){
     pressed = ImGui::ImageButton(TEX_ID textureButtonPreAllocatedID, ImVec2(200, 200));
 
 
-    if(listBoxContent.render())
-    {
-        ofLogVerbose() << "listBoxContent changed to " << listBoxContent.currentIndex;
-    }
+    
 
     
     if(doThemeColorsWindow)

@@ -13,14 +13,16 @@ public:
         label = "";
         currentIndex = 0;
         heightInLines = 0;
-        numItems = 0;
         items = NULL;
-        itemCollection.reserve(10);
     }
     
     ~ListBoxContent()
     {
-        items = NULL;
+        if(items)
+        {
+            delete items;
+            items = NULL;
+        }
         clearItemCollection();
     }
     
@@ -44,42 +46,48 @@ public:
     {
         for(size_t i=0; i<itemCollection.size(); i++)
         {
-            delete itemCollection[i];
+            if(itemCollection[i])
+            {
+                //delete itemCollection[i];
+                itemCollection[i] = NULL;
+            }
+            
         }
         itemCollection.clear();
     }
     
     void addItem(const char * itemName)
     {
-        names.push_back(ofToString(itemName));
-        if(names.size()>itemCollection.capacity())
+        int currentSize = itemCollection.size();
+        itemCollection[currentSize] = itemName;
+        
+        if(items)
         {
-            //https://stackoverflow.com/questions/21144223/c-str-results-from-vectorstring-become-garbage-with-libc
-           
-            clearItemCollection();
-            itemCollection.reserve(names.size());
+            delete items;
             items = NULL;
         }
-        
-        for(size_t i=0; i<names.size(); i++)
+       
+        items = (const char**)malloc(sizeof(const char*) * itemCollection.size());
+
+        for(int i=0; i<itemCollection.size(); i++)
         {
-            itemCollection[i] = names[i].c_str();
+            items[i] = itemCollection[i];
         }
-        items = &itemCollection[0];
-        numItems = names.size();
     }
     
-    bool render()
+    bool draw()
     {
+        if(!items) return;
+        
         bool result =  ImGui::ListBox(label.c_str(),
                        &currentIndex,
                        items,
-                       numItems,
+                       itemCollection.size(),
                        heightInLines);
         
         if(result)
         {
-            ofLogVerbose() << names[currentIndex];
+            ofLogVerbose() << itemCollection[currentIndex];
         }
         return result;
     }
@@ -88,7 +96,6 @@ public:
     int currentIndex;
     int heightInLines;
     const char** items;
-    int numItems;
-    vector<const char *> itemCollection;
-    vector<string> names;
+    string itemBuffer;
+    map< int, const char *> itemCollection;
 };
