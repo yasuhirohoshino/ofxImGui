@@ -114,3 +114,9 @@ Desktop.ini
 #########################
 
 .mailmap
+
+
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.rc
