@@ -144,7 +144,9 @@ namespace ofxImGui
 			io.MouseDown[i] = engine->mousePressed[i];
 
 			// Update for next frame; set to false only if the mouse has been released
-			engine->mousePressed[i] = !engine->mouseReleased;
+			if (engine->mousePressed[i]) {
+				engine->mousePressed[i] = !engine->mouseReleased;
+			}
 		}
 		ImGui::NewFrame();
 	}
